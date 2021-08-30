@@ -5,6 +5,8 @@
 // @description  Bot!
 // @author       VadimFrolov
 // @match        https://ya.ru/*
+// @match        https://yandex.ru/*
+// @match        https://muzinstru.ru/*
 // @grant        none
 // ==/UserScript==
 
@@ -21,7 +23,7 @@ if (btn !== undefined) {
     for (let i=0; i<links.length; i++) {
         if (links[i].href.includes('muzinstru.ru')){
             let link = links[i];
-            //link.removeAttribute('target');
+            link.removeAttribute('target');
             link.click();
             console.log("Нашел строку" + links[i]);
             break;
