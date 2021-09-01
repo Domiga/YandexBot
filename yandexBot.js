@@ -4,32 +4,31 @@
 // @version      0.1
 // @description  Bot!
 // @author       VadimFrolov
-// @match        https://ya.ru/*
 // @match        https://yandex.ru/*
-// @match        https://muzinstru.ru/*
+// @match        https://ya.ru/*
 // @grant        none
 // ==/UserScript==
 
-let keywords = ["гобой", "фагот", "балабан", "флюгельгорн"];
-let btn = document.querySelectorAll('button.mini-suggest__button')[0];
+let keywords = ['читать фантастику', 'читать литрпг', 'читать про попаданцев', 'чиать фентези'];
+let keyword = keywords[getRandom(0, keywords.length)];
 let links = document.links;
-let keyword = keywords[getRandom(0,keywords.length)];
-document.getElementById("text").value = keyword;
+let btn = document.querySelector('.button_theme_search');
+document.getElementsByName('text')[0].value = keyword;
 
 
-if (btn !== undefined) {
+if (btn !== null && btn !== undefined) {
     btn.click();
-}else{
-    for (let i=0; i<links.length; i++) {
-        if (links[i].href.includes('muzinstru.ru')){
+} else {
+    for (let i = 0; i < links.length; i++) {
+        if (links[i].href.includes('author.today')) {
             let link = links[i];
-            link.removeAttribute('target');
+            link.setAttribute("target", "_self");
             link.click();
-            console.log("Нашел строку" + links[i]);
             break;
         }
     }
 }
-function getRandom(min,max) {
-    return Math.floor(Math.random()*(max-min)+min)
+
+function getRandom(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
 }
